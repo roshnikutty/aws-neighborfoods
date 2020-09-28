@@ -1,0 +1,268 @@
+html {
+    height: 100%;  /* for the content to size the page height */
+}
+
+.app{
+    max-width: 800px;
+    margin: auto;
+}
+.demo {
+    color: white;
+    font-family: Roboto;
+    padding-top: 10px;
+    display: block;
+}
+h1>a{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight:300; 
+    color:#ffffff;
+    line-height: 41px;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.black-box{
+    margin: 10px 10px 10px 20px;
+    padding: 5px 20px 5px 20px;
+    background-color: #000000;
+    opacity: 0.85;
+    color: #d7d7d7;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 100;
+    border-radius: 4px;
+}
+h2 {
+    margin: 40px 0px 20px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight:200; 
+    color:#ffffff;
+}
+.or {
+    text-align: center;
+}
+.signup, .login {
+    max-width: 500px;
+    margin: auto;
+}
+#signup-form, #login-form{
+    margin: auto;
+    padding-top: 7.5%;
+}
+.signup-login-button{
+    margin-left:34px;
+    margin-bottom: 12px;
+    font-size: 1.15em;
+    display: inline-block;
+
+}
+input.blank{
+    text-align: center;
+    padding: 0;
+    width: 100%;
+}
+button {
+    background-color: #ff5722;
+    color: #000000;
+    height:50px;
+    width: 200px;
+    margin: auto;
+    border-radius: 4px;
+    border: 0;
+    font-size: 16px;
+}
+button:hover{
+	background-color: #595b5b;
+    cursor: pointer;
+}
+
+.blank {
+    background-color: transparent;
+    color: #c78181;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.15em;
+    font-weight: 100;
+    line-height: 3em;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #dfdfdf 1px;
+    padding: 3px 10px;
+    outline: none;
+    outline-style: none;
+}
+.large-line-height {
+    line-height: 286%;
+}
+.each-input {
+    padding-left: 29px;
+    padding-right: 40px;
+}
+.each-input>input.blank {
+    text-align: center;
+    width: 100%;
+}
+input:required {         /*fix for Firefox showing red border around required fields*/
+    box-shadow:none;
+}
+p.signup_button, p.login_button {
+    text-align: center;
+}
+#new-meal-style, #new-buyer-style {
+    padding: 20px;
+    margin: auto;
+    max-width: 50%;
+}
+.required{
+    color: #c78181;
+    font-size: 0.8em;
+}
+.landing-button, .page-login-signup-button {
+    max-width: 90px;
+    padding: 5px;
+       
+}
+.landing-button {
+    margin:0px 5px;
+}
+.header-buttons, .logout-style-p {
+    text-align: right;
+}
+.search-meals-button {
+        text-align: left;
+
+}
+
+.login-style, .logout-style {
+    background-color: #cacdce;
+    color:#ff5722;
+    margin-right: 12px;
+}
+.logout-style{
+    padding:9px;
+    height:auto;
+    width:auto;   
+}
+.form-button{
+    margin: 3% 29% 0 38%;
+}
+.meal-area {
+    margin: auto;
+    padding: 5%;
+    list-style: none;
+}
+.meal-item {
+    list-style-type: none;
+    margin:auto;
+    width: 70%;
+    margin-top:10px;
+    padding: 20px 20px;
+    overflow-x: scroll;
+}
+
+.post-buy-button, .search-meals-button { 
+    margin-right: 30px;
+}
+.buy-button, .post-buy-button {
+    text-align: right;
+}
+strong {
+    color: #ff5722;
+    margin-right: 10px;
+}
+.two-col-left, .two-col-right{
+    display: inline-block;
+}
+.buttons-box{
+    text-align: center;
+    margin-top: 100px;
+}
+.session-button{
+    margin-right: 100px;
+}
+#warn {
+    font-size: 1.2em;
+}
+/*---------media queries----------------*/
+/* screens width upto 900px */
+
+@media (max-width: 900px) {
+    h1, #warn{
+        text-align: center; 
+        align-items: center;
+    }
+    .header-login-button, .header-signup-button, .header-buttons, 
+    .post-buy-button, .buy-button, .search-meals-button, .logout-style-p {
+        text-align: center;
+    }
+    .post-buy-button, .search-meals-button {
+        margin-right: 0;
+    }
+    #new-meal-style, #new-buyer-style {
+        max-width: 100%;
+    }
+    .two-col-right {
+        display: block;
+        margin-left: 0;
+    }
+    .session-button{
+        display: block;
+        margin: auto;
+        margin-bottom: 50px;
+    }
+}
+
+/* screens width upto 650px */
+
+@media (max-width: 650px) {
+    header > h1, #warn {
+        width: 100%;
+    }
+    body {
+        margin: 10px 0;
+    }
+    #signup-form {
+        width: 100%;
+        padding: 0;
+    }
+    .black-box {
+        margin: 0;
+        max-width: none;
+        background-color: #000000;
+        opacity: 0.85;
+        color: #d7d7d7;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 100;
+        border-radius: 4px;
+        width: calc(100% - 40px) !important;
+     }
+    .signup {
+        margin-top: 7%;
+        width: 100%;
+    }
+    input.blank {
+        width: 100%;
+    }
+    li.black-box {
+        margin-bottom: 10px;
+    }
+    .two-col-right {
+        display: block;
+        margin-left: 0;
+    }
+}
+
+/* Screens wider than 900px */
+
+@media (min-width: 900px) {
+    .page-login-signup-button {
+        float: right;
+        margin: 0px 40px 0px 15px;
+    }
+    .two-col-right {
+        margin-left: 10%;
+    }
+}
