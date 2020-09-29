@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Snackbar from 'material-ui/Snackbar';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+
 import { hideSnackBar } from './action';
 import { history } from '../store'
 import SignUp from '../Signup';
@@ -59,4 +61,4 @@ const mapStateToProps = (state) => ({
     snackbar: state.app.snackbar
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(App))

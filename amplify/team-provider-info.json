@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-neighborfoodsreactfr-dev-185754-authRole",
+      "UnauthRoleArn": "arn:aws:iam::588815564988:role/amplify-neighborfoodsreactfr-dev-185754-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::588815564988:role/amplify-neighborfoodsreactfr-dev-185754-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-neighborfoodsreactfr-dev-185754-deployment",
+      "UnauthRoleName": "amplify-neighborfoodsreactfr-dev-185754-unauthRole",
+      "StackName": "amplify-neighborfoodsreactfr-dev-185754",
+      "StackId": "arn:aws:cloudformation:us-east-2:588815564988:stack/amplify-neighborfoodsreactfr-dev-185754/0bf894e0-01de-11eb-899b-061567935150",
+      "AmplifyAppId": "d1huc507n6tt2y"
+    },
+    "categories": {
+      "auth": {
+        "neighborfoodsreactfr0d72d97b": {}
+      }
+    }
+  }
+}

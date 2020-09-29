@@ -7,9 +7,6 @@ import { createBuyer } from './action';
 
 import { clearAuthToken } from '../logout';
 
-var injectTapEventPlugin = require("react-tap-event-plugin");
-injectTapEventPlugin();
-
 const validate = values => {
     const errors = {}
     if (!values.buyer_name) {
