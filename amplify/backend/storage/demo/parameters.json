@@ -1,0 +1,32 @@
+{
+    "bucketName": "nftestbucket",
+    "authPolicyName": "s3_amplify_1ed8e7fc",
+    "unauthPolicyName": "s3_amplify_1ed8e7fc",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "selectedGuestPermissions": [
+        "s3:GetObject",
+        "s3:ListBucket"
+    ],
+    "selectedAuthenticatedPermissions": [
+        "s3:DeleteObject"
+    ],
+    "s3PermissionsAuthenticatedPublic": "s3:DeleteObject",
+    "s3PublicPolicy": "Public_policy_cfdec4f1",
+    "s3PermissionsAuthenticatedUploads": "DISALLOW",
+    "s3UploadsPolicy": "Uploads_policy_cfdec4f1",
+    "s3PermissionsAuthenticatedProtected": "s3:DeleteObject",
+    "s3ProtectedPolicy": "Protected_policy_cfdec4f1",
+    "s3PermissionsAuthenticatedPrivate": "s3:DeleteObject",
+    "s3PrivatePolicy": "Private_policy_cfdec4f1",
+    "AuthenticatedAllowList": "DISALLOW",
+    "s3ReadPolicy": "read_policy_cfdec4f1",
+    "s3PermissionsGuestPublic": "DISALLOW",
+    "s3PermissionsGuestUploads": "DISALLOW",
+    "GuestAllowList": "DISALLOW",
+    "triggerFunction": "NONE"
+}

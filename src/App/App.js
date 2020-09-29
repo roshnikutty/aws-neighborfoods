@@ -1,64 +1,103 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { Route } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Snackbar from 'material-ui/Snackbar';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { API, Storage } from 'aws-amplify';
 
-import { hideSnackBar } from './action';
-import { history } from '../store'
-import SignUp from '../Signup';
-import LogIn from '../Login';
-import Home from '../Home';
-import Meals from '../Meals';
-import requireAuthentication from './RequireAuthentication'
+import { listNotes } from './graphql/queries';
+import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
 
-import './app.css';
+const initialFormState = { name: '', description: '' }
 
-const App = (props) => {
+function App() {
+  const [notes, setNotes] = useState([]);
+  const [formData, setFormData] = useState(initialFormState);
 
-    return (
-        <ConnectedRouter history={history}>
-            <MuiThemeProvider>
-                <div>
-                    <Snackbar message={props.snackbar} 
-                                autoHideDuration={4000} 
-                                open={!!props.snackbar} 
-                                bodyStyle={{ backgroundColor: 'teal', color: '#ffffff' }}
-                                onRequestClose={props.hideSnackBar} />
-                        <Route
-                            exact
-                            path="/"
-                            component={Home}
-                        />
-                        <Route
-                            exact
-                            path="/login"
-                            component={LogIn}
-                        />
-                        <Route
-                            exact
-                            path="/signup"
-                            component={SignUp} />
-                        <Route
-                            path="/meals"
-                            component={requireAuthentication(Meals)}
-                            >
-                        </Route>
-                        
-                </div>
-            </MuiThemeProvider>
-        </ConnectedRouter>
-    );
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
+  async function onChange(e) {
+    if (!e.target.files[0]) return
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: file.name });
+    await Storage.put(file.name, file);
+    fetchNotes();
+  }
+
+  async function fetchNotes() {
+    const apiData = await API.graphql({ query: listNotes });
+    const notesFromAPI = apiData.data.listNotes.items;
+    await Promise.all(notesFromAPI.map(async note => {
+      if (note.image) {
+        const image = await Storage.get(note.image);
+        note.image = image;
+      }
+      return note;
+    }))
+    setNotes(apiData.data.listNotes.items);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    hideSnackBar: () => { dispatch(hideSnackBar()) }
-})
+  async function createNote() {
+    if (!formData.name || !formData.description) return;
+    await API.graphql({ query: createNoteMutation, variables: { input: formData } });
+    if (formData.image) {
+      const image = await Storage.get(formData.image);
+      formData.image = image;
+    }
+    setNotes([ ...notes, formData ]);
+    setFormData(initialFormState);
+  }
 
-const mapStateToProps = (state) => ({
-    snackbar: state.app.snackbar
-})
+  async function deleteNote({ id }) {
+    const newNotesArray = notes.filter(note => note.id !== id);
+    setNotes(newNotesArray);
+    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } }});
+  }
 
-export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(App))
+  return (
+    <div className="App">
+      <h1>My Notes App</h1>
+      <input
+        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
+        placeholder="Note name"
+        value={formData.name}
+      />
+      <input
+        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+        placeholder="Note description"
+        value={formData.description}
+      />
+      <button onClick={createNote}>Create Note</button>
+      <div style={{marginBottom: 30}}>
+        {
+          notes.map(note => (
+            <div key={note.id || note.name}>
+              <h2>{note.name}</h2>
+              <p>{note.description}</p>
+              <button onClick={() => deleteNote(note)}>Delete note</button>
+            </div>
+          ))
+        }
+      </div>
+      <input
+        type="file"
+        onChange={onChange}
+      />
+      {
+        notes.map(note => (
+          <div key={note.id || note.name}>
+            <h2>{note.name}</h2>
+            <p>{note.description}</p>
+            <button onClick={() => deleteNote(note)}>Delete note</button>
+            {
+              note.image && <img src={note.image} style={{width: 400}} />
+            }
+          </div>
+        ))
+      }
+      <AmplifySignOut />
+    </div>
+  );
+}
+
+export default withAuthenticator(App);
